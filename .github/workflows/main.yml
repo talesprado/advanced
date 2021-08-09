@@ -1,32 +1,34 @@
-name: VVS Workflow
+name: PHP Building Workflow
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: [push]
 
 jobs:
-  build:
-    name: Tests
+
+  composer_install:
     runs-on: ubuntu-latest
+
+    env:
+      COMPOSER_VERSION: 1
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Setting up PHP
-        uses: ./.github/actions/php
+      - name: Get composer cache directory
+        id: composer_config
+        uses: baschny/php-composer-action@v1
+        with:
+          composer_version: ${{ env.COMPOSER_VERSION }}
+          command: get_config
 
-      - name: Installing Composer
-        run: ./.github/scripts/run-composer.sh
+      - name: Cache composer downloads
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer_config.outputs.composer_cache_dir }}
+          key: composer-v${{ steps.composer_config.outputs.composer_major_version }}
 
-      - name: Running PHPStan
-        run: ./.github/scripts/run-phpstan.sh
-
-      - name: PHP Insights
-        run: ./.github/scripts/run-phpinsights.sh
-
-      - name: Running PHPUnit
-        run: ./.github/scripts/run-phpunit.sh
+      - name: Run composer install
+        uses: baschny/php-composer-action@v1
+        with:
+          composer_version: ${{ env.COMPOSER_VERSION }}
+          command: install
