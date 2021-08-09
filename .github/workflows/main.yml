@@ -1,4 +1,4 @@
-name: App Workflow
+name: VVS Workflow
 
 on:
   push:
