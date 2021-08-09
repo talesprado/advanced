@@ -14,7 +14,7 @@ class ContactFormTest extends \Codeception\Test\Unit
             'name' => 'Tester',
             'email' => 'tester@example.com',
             'subject' => 'very important letter subject',
-            'body' => 'body of current message',
+            'body' => 'body of current message 2',
         ];
 
         expect_that($model->sendEmail('admin@example.com'));
