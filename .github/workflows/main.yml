@@ -1,34 +1,13 @@
-name: PHP Building Workflow
+name: CI
 
 on: [push]
 
 jobs:
-
-  composer_install:
+  build-test:
     runs-on: ubuntu-latest
 
-    env:
-      COMPOSER_VERSION: 1
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Get composer cache directory
-        id: composer_config
-        uses: baschny/php-composer-action@v1
-        with:
-          composer_version: ${{ env.COMPOSER_VERSION }}
-          command: get_config
-
-      - name: Cache composer downloads
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer_config.outputs.composer_cache_dir }}
-          key: composer-v${{ steps.composer_config.outputs.composer_major_version }}
-
-      - name: Run composer install
-        uses: baschny/php-composer-action@v1
-        with:
-          composer_version: ${{ env.COMPOSER_VERSION }}
-          command: install
+    - uses: actions/checkout@v2
+    - uses: php-actions/composer@v5 # or alternative dependency management
+    - uses: php-actions/phpunit@v3
+    # ... then your own project steps ...
