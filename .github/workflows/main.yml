@@ -1,137 +1,32 @@
-on:
-  pull_request:
-    branches-ignore: gh-pages
-  push:
-    branches-ignore: gh-pages
+name: App Workflow
 
-name: build
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
-  linux:
-    name: PHP ${{ matrix.php }}-${{ matrix.os }}
-
-    env:
-      extensions: curl, mbstring, openssl, pdo, pdo_sqlite
-      SYMFONY_DEPRECATIONS_HELPER: weak
-
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        php: ["7.3", "7.4", "8.0"]
-
+  build:
+    name: Tests
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
 
-      - name: Install PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: ${{ env.extensions }}
-          ini-values: memory_limit=-1, date.timezone='UTC'
-          coverage: xdebug
-          tools: composer:v2
+      - name: Setting up PHP
+        uses: ./.github/actions/php
 
-      - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+      - name: Installing Composer
+        run: ./.github/scripts/run-composer.sh
 
-      - name: Cache dependencies installed with composer
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
-          key: php${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            php${{ matrix.php }}-composer-
-      - name: Update composer
-        run: composer self-update
+      - name: Running PHPStan
+        run: ./.github/scripts/run-phpstan.sh
 
-      - name: Validate composer.json
-        run: composer validate
+      - name: PHP Insights
+        run: ./.github/scripts/run-phpinsights.sh
 
-      - name: Composer install
-        run: composer install --prefer-source --no-interaction --no-progress --optimize-autoloader --ansi
-
-      - name: Test that failing test really fails
-        run: if php codecept run -c tests/data/claypit/ scenario FailedCept -vvv; then echo "Test hasn't failed"; false; fi;
-
-      - name: Run tests without code coverage on PHP 7.3, 7.4
-        if: matrix.php == '7.3' || matrix.php == '7.4'
-        run: |
-          php -S 127.0.0.1:8008 -t tests/data/app >/dev/null 2>&1 &
-          php codecept build
-          php codecept run cli,unit
-      - name: Run tests with code coverage on PHP 7.2, 8.0
-        if: matrix.php == '7.2' || matrix.php == '8.0'
-        run: |
-          php -S 127.0.0.1:8008 -t tests/data/app -d pcov.directory=$(pwd)/tests/data/app >/dev/null 2>&1 &
-          php codecept build
-          php codecept run cli,unit,coverage --env COVERAGE=1
-      - name: Run module-asserts tests
-        run: php codecept run -c vendor/codeception/module-asserts/
-
-      - name: Run module-filesystem tests
-        run: php codecept run -c vendor/codeception/module-filesystem/
-
-      - name: Run module-db sqlite tests
-        run: php codecept run -c vendor/codeception/module-db/ unit :Sqlite
-
-      - name: Run module-phpbrowser tests
-        run: |
-          cd vendor/codeception/module-phpbrowser/
-          php -S 127.0.0.1:8000 -t tests/data/app >/dev/null 2>&1 &
-          php -S 127.0.0.1:8010 -t tests/data/rest >/dev/null 2>&1 &
-          php ../../../codecept run tests/unit/Codeception/Module/PhpBrowserTest.php
-  windows-latest:
-    name: PHP ${{ matrix.php }}-${{ matrix.os }}
-
-    env:
-      extensions: curl, mbstring, openssl, pdo, pdo_sqlite
-      SYMFONY_DEPRECATIONS_HELPER: weak
-
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest]
-        php: ["7.3", "7.4", "8.0"]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Install PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: ${{ env.extensions }}
-          ini-values: memory_limit=-1, date.timezone='UTC'
-          tools: composer:v2
-
-      - name: Determine composer cache directory
-        run: echo "COMPOSER_CACHE_DIR=~\AppData\Local\Composer" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
-      - name: Cache dependencies installed with composer
-        uses: actions/cache@v2
-        with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
-          key: php${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            php${{ matrix.php }}-composer-
-      - name: Update composer
-        run: composer self-update
-
-      - name: Validate composer.json
-        run: composer validate
-
-      - name: Composer install
-        run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
-
-      - name: Run tests cli
-        run: php codecept run cli --skip-group coverage
-        
-      - name: Run tests unit
-        run: php codecept run unit -g core -g appveyor
+      - name: Running PHPUnit
+        run: ./.github/scripts/run-phpunit.sh
