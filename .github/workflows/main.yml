@@ -35,6 +35,3 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           
-     # install codeception
-      - name: tests
-        uses: joelwmale/codeception-action@master
