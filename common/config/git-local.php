@@ -4,7 +4,7 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=127.0.0.1:3306;dbname=vvs_test',
-            'username' => 'pradota',
+            'username' => 'root',
             'password' => '123581321',
             'charset' => 'utf8',
         ],
