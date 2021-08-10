@@ -39,6 +39,7 @@ jobs:
       - name: Run yii framework init
         run: |
           php ./init --env=Development --overwrite=All --delete=All
+          composer update
           ls -l
           
     
