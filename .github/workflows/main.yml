@@ -28,13 +28,13 @@ jobs:
       - name: Start MySQL
         uses: samin/mysql-action@v1.3
         with:
-          mysql root password: 123581321 # optional, default is 
+          mysql root password: '123581321' # optional, default is 
     # MYSQL_DATABASE - name for the default database that is created
-          mysql database: vvs_test # optional, default is 
+          mysql database: 'vvs_test' # optional, default is 
     # MYSQL_USER - create the specified user with superuser power for created database
-          mysql user: pradota # optional, default is 
+          mysql user: 'pradota' # optional, default is 
     # MYSQL_PASSWORD - specified superuser password which user is power for created database
-          mysql password: 123581321 # optional, default is 
+          mysql password: '123581321' # optional, default is 
           
       - name: Configure Yii project
         run: |
