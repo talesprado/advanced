@@ -36,11 +36,22 @@ jobs:
     # MYSQL_PASSWORD - specified superuser password which user is power for created database
           mysql password: 123581321 # optional, default is 
           
-      - name: Run yii framework init
+      - name: Configure Yii project
         run: |
-          php ./init --env=Development --overwrite=All --delete=All
           composer update
-          ls -l
+          php ./init --env=Development --overwrite=All --delete=All
+          cp ./common/config/test-local.php ./common/config/main-local.php
+          cd ./common/config
+          cat main-local.php
+          cat test-local.php
+          
+      - name: Yii database migrate
+        run: |
+          php ./yii migrate
+          php ./yii_test migrate
+          
+      - name: Run tests
+        run: vendor/bin/codecept run
           
     
           
