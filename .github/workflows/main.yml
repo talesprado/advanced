@@ -45,7 +45,9 @@ jobs:
           ls -l
           
       - name: Yii database migrate
-        run: php ./yii_test migrate
+        run: |
+          php ./yii migrate
+          php ./yii_test migrate
           
       - name: Run tests
         run: vendor/bin/codecept run
