@@ -41,8 +41,11 @@ jobs:
           composer update
           php ./init --env=Development --overwrite=All --delete=All
           cp ./common/config/test-local.php ./common/config/main-local.php
-          php ./yii_test migrate
+          cd ./common/config
           ls -l
+          
+      - name: Yii database migrate
+        run: php ./yii_test migrate
           
       - name: Run tests
         run: vendor/bin/codecept run
