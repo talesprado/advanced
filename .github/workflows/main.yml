@@ -35,8 +35,6 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           
-      - name: Codeception Action
-       # You may pin to the exact commit or the version.
-       # uses: joelwmale/codeception-action@104032c6a73aa7f1ad17dc81a9eebf7d122d76b6
-        uses: joelwmale/codeception-action@1.0.0
+      - name: Composer Action
+        uses: MilesChou/composer-action@v1.0.2
           
