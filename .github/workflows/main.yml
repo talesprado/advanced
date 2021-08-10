@@ -49,7 +49,9 @@ jobs:
       - name: Yii database migrate
         run: |
           php ./yii migrate
+          yes
           php ./yii_test migrate
+          yes
           
       - name: Run tests
         run: vendor/bin/codecept run
