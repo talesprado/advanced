@@ -42,7 +42,8 @@ jobs:
           php ./init --env=Development --overwrite=All --delete=All
           cp ./common/config/test-local.php ./common/config/main-local.php
           cd ./common/config
-          ls -l
+          cat main-local.php
+          cat test-local.php
           
       - name: Yii database migrate
         run: |
