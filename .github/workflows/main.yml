@@ -40,7 +40,8 @@ jobs:
         run: |
           composer update
           php ./init --env=Development --overwrite=All --delete=All
-          cp ./common/config/test-local.php ./common/config/main-local.php
+          cp ./common/config/git-local.php ./common/config/main-local.php
+          cp ./common/config/git-local.php ./common/config/test-local.php
           cd ./common/config
           cat main-local.php
           cat test-local.php
