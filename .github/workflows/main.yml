@@ -40,6 +40,7 @@ jobs:
         run: |
           composer update
           php ./init --env=Development --overwrite=All --delete=All
+          cp ./common/config/test-local.php ./common/config/main-local.php
           php ./yii_test migrate
           ls -l
           
