@@ -48,10 +48,8 @@ jobs:
           
       - name: Yii database migrate
         run: |
-          php ./yii migrate
-          yes
-          php ./yii_test migrate
-          yes
+          php ./yii migrate --interactive=0
+          php ./yii_test migrate --interactive=0
           
       - name: Run tests
         run: vendor/bin/codecept run
