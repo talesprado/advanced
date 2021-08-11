@@ -50,6 +50,9 @@ jobs:
         run: |
           php ./yii migrate --interactive=0
           php ./yii_test migrate --interactive=0
+      
+      - name: Setup Geckodriver
+        uses: browser-actions/setup-geckodriver@v0.0.0
           
       - name: Run tests
         run: vendor/bin/codecept run
