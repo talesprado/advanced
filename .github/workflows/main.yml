@@ -59,6 +59,7 @@ jobs:
       
       - name: Run Acceptance Tests
         run: |
+          composer require codeception/module-webdriver --dev
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
           vendor/bin/codecept build -- -c frontend          
           vendor/bin/codecept run acceptance -- -c frontend
