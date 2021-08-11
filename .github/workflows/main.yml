@@ -54,8 +54,12 @@ jobs:
       - name: Setup Geckodriver
         uses: browser-actions/setup-geckodriver@v0.0.0
           
-      - name: Run tests
+      - name: Run Unit and Functional Tests
         run: vendor/bin/codecept run
+      
+      - name: Run Acceptance Tests
+        run: vendor/bin/codecept run acceptance -- -c frontend
+        
           
     
           
