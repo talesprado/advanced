@@ -33,13 +33,17 @@ jobs:
           cp ./common/config/git-local.php ./common/config/test-local.php
           cd ./common/config
           
-      - name: Start MySQL
-        uses: samin/mysql-action@v1.3
+      - name: Setup MySQL
+        uses: mirromutth/mysql-action@v1.1
         with:
-          mysql root password: '123581321' 
-          mysql database: 'vvs_test'
-          mysql user: 'pradota'
-          mysql password: '123581321'
+        
+          mysql root password: '123581321' # optional, default is 
+          # MYSQL_DATABASE - name for the default database that is created
+          mysql database: 'vvs_test' 
+          # MYSQL_USER - create the specified user with superuser power for created database
+          mysql user: 'pradota'# optional, default is 
+          # MYSQL_PASSWORD - specified superuser password which user is power for created database
+          mysql password: '123581321'# optional, default is 
           
       - name: Yii database migrate
         run: |
