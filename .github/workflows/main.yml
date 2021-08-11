@@ -58,7 +58,9 @@ jobs:
         run: vendor/bin/codecept run
       
       - name: Run Acceptance Tests
-        run: vendor/bin/codecept run acceptance -- -c frontend
+        run: |
+          vendor/bin/codecept build -- -c frontend
+          vendor/bin/codecept run acceptance -- -c frontend
         
           
     
