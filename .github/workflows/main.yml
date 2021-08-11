@@ -59,15 +59,15 @@ jobs:
       
       - name: Start Selenoid Server
         uses: Xotabu4/selenoid-github-action@v2
-        with:
-          selenoid-start-arguments: --browsers 'firefox' last-versions 1
+       # with:
+      #  selenoid-start-arguments: --browsers 'firefox' last-versions 1
       
       - name: Run Acceptance Tests
         run: |
           composer require codeception/module-webdriver --dev
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
           vendor/bin/codecept build -- -c frontend          
-          php -S 127.0.0.1:8080 -t frontend/web &
+       # php -S 127.0.0.1:8080 -t frontend/web &
           vendor/bin/codecept run acceptance -- -c frontend
         
           
