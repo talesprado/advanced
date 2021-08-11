@@ -59,7 +59,8 @@ jobs:
       
       - name: Run Acceptance Tests
         run: |
-          vendor/bin/codecept build -- -c frontend
+          mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
+          vendor/bin/codecept build -- -c frontend          
           vendor/bin/codecept run acceptance -- -c frontend
         
           
