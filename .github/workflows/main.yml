@@ -50,17 +50,25 @@ jobs:
         run: |
           php ./yii migrate --interactive=0
           php ./yii_test migrate --interactive=0
-      
-      - name: Setup Geckodriver
-        uses: browser-actions/setup-geckodriver@v0.0.0
 
       - name: Run Unit and Functional Tests
         run: vendor/bin/codecept run
       
+      - name: Start Selenoid Server
+        uses: Xotabu4/selenoid-github-action@v2
+        with:
+          selenoid-start-arguments: --browsers 'firefox' last-versions 1
+      
+      - name: Setup Geckodriver
+        uses: browser-actions/setup-geckodriver@v0.0.0
+        with: 
+          geckodriver-version: latest
+          
       - name: Run Acceptance Tests
         run: |
           composer require codeception/module-webdriver --dev
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
+          php -S 127.0.0.1:8080 -t frontend/web
           vendor/bin/codecept build -- -c frontend          
           vendor/bin/codecept run acceptance -- -c frontend
         
