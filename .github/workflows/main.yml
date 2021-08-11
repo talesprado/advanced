@@ -59,8 +59,8 @@ jobs:
       
       - name: Start Selenoid Server
         uses: Xotabu4/selenoid-github-action@v2
-       # with:
-      #  selenoid-start-arguments: --browsers 'firefox' last-versions 1
+        with:
+          selenoid-start-arguments: --browsers 'firefox' last-versions 1
       
       - name: Run Acceptance Tests
         run: |
