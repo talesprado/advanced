@@ -23,18 +23,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-        
-      - name: Start MySQL
-        uses: samin/mysql-action@v1.3
-        with:
-          mysql root password: '123581321' # optional, default is 
-    # MYSQL_DATABASE - name for the default database that is created
-          mysql database: 'vvs_test' # optional, default is 
-    # MYSQL_USER - create the specified user with superuser power for created database
-          mysql user: 'pradota' # optional, default is 
-    # MYSQL_PASSWORD - specified superuser password which user is power for created database
-          mysql password: '123581321' # optional, default is 
+      - uses: actions/checkout@v2 
           
       - name: Configure Yii project
         run: |
@@ -43,8 +32,14 @@ jobs:
           cp ./common/config/git-local.php ./common/config/main-local.php
           cp ./common/config/git-local.php ./common/config/test-local.php
           cd ./common/config
-          cat main-local.php
-          cat test-local.php
+          
+      - name: Start MySQL
+        uses: samin/mysql-action@v1.3
+        with:
+          mysql root password: '123581321' 
+          mysql database: 'vvs_test'
+          mysql user: 'pradota'
+          mysql password: '123581321'
           
       - name: Yii database migrate
         run: |
