@@ -67,6 +67,7 @@ jobs:
           composer require codeception/module-webdriver --dev
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
           vendor/bin/codecept build -- -c frontend          
+          php -S 127.0.0.1:8080 -t frontend/web &
           vendor/bin/codecept run acceptance -- -c frontend
         
           
