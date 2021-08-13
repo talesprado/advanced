@@ -25,10 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2 
       
-      - name: Stop MySQL
-        run: sudo killall mysqld mysqld_safe
-      
-      
       - name: Setup MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
