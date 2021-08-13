@@ -24,6 +24,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2 
+      
+      - name: actions-setup-mysql
+      # You may pin to the exact commit or the version.
+      # uses: shogo82148/actions-setup-mysql@45e0e2077772fa428a963481a49675a9a5049bdc
+        uses: shogo82148/actions-setup-mysql@v1.2.7
+        with:
+          root-password: '123581321' 
+          user: 'pradota'
+          password: '123581321'
           
       - name: Configure Yii project
         run: |
