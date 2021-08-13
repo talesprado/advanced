@@ -32,6 +32,7 @@ jobs:
           cp ./common/config/git-local.php ./common/config/main-local.php
           cp ./common/config/git-local.php ./common/config/test-local.php
           cd ./common/config
+          sudo service mysql stop
           
       - name: Setup MySQL
         uses: mirromutth/mysql-action@v1.1
@@ -47,8 +48,6 @@ jobs:
           
       - name: Yii database migrate
         run: |
-          sudo service mysql start
-          systemctl status mysql.service
           php ./yii migrate --interactive=0
           php ./yii_test migrate --interactive=0
 
