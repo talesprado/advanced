@@ -36,7 +36,7 @@ jobs:
       - name: Setup MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
-        
+          host port: 3306
           mysql root password: '123581321' # optional, default is 
           # MYSQL_DATABASE - name for the default database that is created
           mysql database: 'vvs_test' 
