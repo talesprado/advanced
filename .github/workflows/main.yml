@@ -27,8 +27,6 @@ jobs:
           
       - name: Configure Yii project
         run: |
-          sudo apt purge mysql-client-5.7 mysql-client-core-5.7 mysql-common mysql-server-5.7 mysql-server-core-5.7 mysql-server
-          sudo apt update && sudo apt dist-upgrade && sudo apt autoremove && sudo apt -f install
           composer update
           php ./init --env=Development --overwrite=All --delete=All
           cp ./common/config/git-local.php ./common/config/main-local.php
