@@ -63,13 +63,13 @@ jobs:
         with: 
           geckodriver-version: latest
           
-      - name: Run Acceptance Tests
-        run: |
-          composer require codeception/module-webdriver --dev
-          mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
-          php -S 127.0.0.1:8080 -t frontend/web
-          vendor/bin/codecept build -- -c frontend          
-          vendor/bin/codecept run acceptance -- -c frontend
+#      - name: Run Acceptance Tests
+#        run: |
+#          composer require codeception/module-webdriver --dev
+#          mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
+#          php -S 127.0.0.1:8080 -t frontend/web
+#          vendor/bin/codecept build -- -c frontend          
+#          vendor/bin/codecept run acceptance -- -c frontend
         
           
     
