@@ -48,6 +48,7 @@ jobs:
       - name: Yii database migrate
         run: |
           sudo service mysql start
+          systemctl status mysql.service
           php ./yii migrate --interactive=0
           php ./yii_test migrate --interactive=0
 
