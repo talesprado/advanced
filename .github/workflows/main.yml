@@ -28,10 +28,10 @@ jobs:
       - name: Setup MySQL
         uses: mirromutth/mysql-action@v1.1
         with:
-          mysql root password: '123581321'# optional, default is 
-          mysql database: ${{ env.DB_TEST_NAME }} # 'vvs_test'
+          mysql root password: ${{ secrets.DB_ROOT_PASS }}
+          mysql database: 'vvs_test'
           mysql user: 'pradota'
-          mysql password: '123581321'
+          mysql password: ${{ secrets.DB_ROOT_PASS }}
           
       - name: Configure Yii project
         run: |
