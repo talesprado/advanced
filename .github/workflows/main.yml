@@ -29,7 +29,7 @@ jobs:
         uses: mirromutth/mysql-action@v1.1
         with:
           mysql root password: '123581321'# optional, default is 
-          mysql database: 'vvs_test'
+          mysql database: ${{ env.DB_ROOT_PASS }} # 'vvs_test'
           mysql user: 'pradota'
           mysql password: '123581321'
           
