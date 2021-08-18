@@ -52,9 +52,6 @@ jobs:
           ls
           php -S 127.0.0.1:8080 -t frontend/web &
       
-      - name: Starting Selenoid Server (aerokube/selenoid) within actions
-        uses: ajinx/selenoid@2.0
-      
       - name: Setup Geckodriver
         uses: browser-actions/setup-geckodriver@v0.0.0
         with: 
