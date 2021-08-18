@@ -61,13 +61,15 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           
-      - name: Run Acceptance Tests
+      - name: Prepare Aceptance Environment
         run: |
           composer require codeception/module-webdriver --dev
           vendor/bin/codecept build -- -c frontend  
+      - name: Run Acceptance Tests
+        run: |          
           wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
           java -jar selenium-server-standalone-3.141.59.jar &
-          php -S 127.0.0.1:4444 -t frontend/web &
+          php -S 127.0.0.1:8080 -t frontend/web &
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
                   
           vendor/bin/codecept run acceptance -- -c frontend
