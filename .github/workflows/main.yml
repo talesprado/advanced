@@ -72,10 +72,10 @@ jobs:
           
           wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
           java -jar selenium-server-standalone-3.141.59.jar &
+          php -S 127.0.0.1:8080 -t frontend/web &  
           
       - name: Run Acceptance Tests
-        run: |                    
-          php -S 127.0.0.1:8080 -t frontend/web &                            
+        run: |                                                
           vendor/bin/codecept run acceptance -- -c frontend
         
           
