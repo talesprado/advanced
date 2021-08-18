@@ -61,6 +61,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v0.0.0
+          
       - name: Prepare Aceptance Environment
         run: |
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
