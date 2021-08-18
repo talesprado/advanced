@@ -49,6 +49,7 @@ jobs:
       - name: Run Unit and Functional Tests
         run: | 
           vendor/bin/codecept run
+          ls
           php -S 127.0.0.1:8080 -t frontend/web &
       
       - name: Start Selenoid Server
