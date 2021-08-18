@@ -62,11 +62,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      
-      - name: Start Chrome
-        run: chrome --version
-        with:
-          chrome-version: beta
                    
       - name: Prepare Aceptance Environment
         run: |
