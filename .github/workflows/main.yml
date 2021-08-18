@@ -61,8 +61,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       
-      - name: setup-chromedriver
-        uses: nanasess/setup-chromedriver@v1.0.1
+      - name: setup chrome
+        run: |
+          python3 chrome.py
                    
       - name: Prepare Aceptance Environment
         run: |
