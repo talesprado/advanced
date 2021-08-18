@@ -24,6 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2 
+      - uses: browser-actions/setup-chrome@beta
       
       - name: Setup MySQL
         uses: mirromutth/mysql-action@v1.1
@@ -60,12 +61,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          
-      - name: Setup Chrome
-        run: |
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          apt install ./google-chrome-stable_current_amd64.deb
-          
+                   
       - name: Prepare Aceptance Environment
         run: |
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
