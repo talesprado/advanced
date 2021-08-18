@@ -52,10 +52,8 @@ jobs:
           ls
           php -S 127.0.0.1:8080 -t frontend/web &
       
-      - name: Start Selenoid Server
-        uses: Xotabu4/selenoid-github-action@v2
-        with:
-          selenoid-start-arguments: --browsers 'firefox' last-versions 1
+      - name: Starting Selenoid Server (aerokube/selenoid) within actions
+        uses: ajinx/selenoid@2.0
       
       - name: Setup Geckodriver
         uses: browser-actions/setup-geckodriver@v0.0.0
