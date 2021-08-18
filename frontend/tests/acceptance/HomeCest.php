@@ -8,7 +8,7 @@ class HomeCest
 {
     public function checkHome(AcceptanceTester $I)
     {
-        $I->amOnPage('index.php?r=site%2Fabout');
+        $I->amOnPage('index.php');//$I->amOnPage('index.php?r=site%2Fabout');
         $I->see('My Application');
 
         $I->seeLink('About');
