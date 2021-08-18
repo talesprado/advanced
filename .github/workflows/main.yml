@@ -48,9 +48,7 @@ jobs:
 
       - name: Run Unit and Functional Tests
         run: | 
-          vendor/bin/codecept run
-          ls
-          php -S 127.0.0.1:8080 -t frontend/web &
+          vendor/bin/codecept run          
       
       - name: Setup Geckodriver
         uses: browser-actions/setup-geckodriver@v0.0.0
@@ -66,10 +64,12 @@ jobs:
       - name: Run Acceptance Tests
         run: |
           composer require codeception/module-webdriver --dev
+          vendor/bin/codecept build -- -c frontend  
           wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
           java -jar selenium-server-standalone-3.141.59.jar -enablePassThrough false &
+          php -S 127.0.0.1:4444 -t frontend/web &
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
-          vendor/bin/codecept build -- -c frontend          
+                  
           vendor/bin/codecept run acceptance -- -c frontend
         
           
