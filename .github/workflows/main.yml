@@ -58,7 +58,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v2.2.0
         with:
-          java-version: '8'
+          java-version: '15'
           distribution: 'adopt'
       
       - name: setup-chromedriver
