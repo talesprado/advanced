@@ -68,6 +68,7 @@ jobs:
                        
       - name: Prepare Aceptance Environment
         run: |
+          google-chrome --version
           ls -l /usr/bin/ | grep chrome
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
           composer require codeception/module-webdriver --dev
