@@ -63,10 +63,6 @@ jobs:
       
       - name: Setup Python
         uses: actions/setup-python@v2.2.2
-      
-      - name: setup chrome
-        run: |
-          python3 chrome.py
                    
       - name: Prepare Aceptance Environment
         run: |
@@ -75,7 +71,7 @@ jobs:
           vendor/bin/codecept build -- -c frontend  
           
           wget https://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
-          java -jar selenium-server-standalone-3.141.59.jar &
+          java -jar selenium-server-standalone-3.141.59.jar -enablePassThrough false &
           php -S 127.0.0.1:8080 -t frontend/web &  
           
       - name: Run Acceptance Tests
