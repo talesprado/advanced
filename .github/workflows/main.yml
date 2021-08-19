@@ -61,9 +61,11 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       
-      - name: Setup Python
-        uses: actions/setup-python@v2.2.2
-                   
+      - name: setup-chromedriver
+        uses: nanasess/setup-chromedriver@v1.0.1
+        with:
+          chromedriver-version: '92.0.4515.107'
+                       
       - name: Prepare Aceptance Environment
         run: |
           mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
