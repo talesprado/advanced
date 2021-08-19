@@ -64,7 +64,7 @@ jobs:
       - name: setup-chromedriver
         uses: nanasess/setup-chromedriver@v1.0.1
         with:
-          chromedriver-version: '73.0.3683.68'
+          chromedriver-version: '92.0.4515.107'
                        
       - name: Prepare Aceptance Environment
         run: |
