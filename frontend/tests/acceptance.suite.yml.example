@@ -4,6 +4,6 @@ modules:
     enabled:
         - WebDriver:
             url: http://127.0.0.1:8080
-            browser: chrome
+            browser: firefox
         - Yii2:
             part: init
