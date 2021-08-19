@@ -76,8 +76,8 @@ jobs:
           composer require codeception/module-webdriver --dev
           vendor/bin/codecept build -- -c frontend  
           
-          wget https://selenium-release.storage.googleapis.com/3.13/selenium-server-standalone-3.13.0.jar
-          java -jar selenium-server-standalone-3.13.0.jar -enablePassThrough false &
+          wget https://selenium-release.storage.googleapis.com/3.10/selenium-server-standalone-3.10.0.jar
+          java -jar selenium-server-standalone-3.10.0.jar -enablePassThrough false &
           php -S 127.0.0.1:8080 -t frontend/web &  
           
       - name: Run Acceptance Tests
