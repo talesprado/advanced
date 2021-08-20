@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: selenium/standalone-firefox #ubuntu-20.04
+    runs-on: ubuntu-20.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -63,7 +63,7 @@ jobs:
           php -S 127.0.0.1:8080 -t frontend/web &  
           npm install -g selenium-side-runner
           npm install -g geckodriver
-          selenium-side-runner -c "browserName=firefox" advanced.side
+          MOZ_HEADLESS=1 selenium-side-runner -c "browserName=firefox" advanced.side
   
         
           
