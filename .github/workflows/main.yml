@@ -76,6 +76,14 @@ jobs:
       - name: Publica
         run: echo "Aqui o site seria publicado via ftp"
         
+  email:
+    runs-on: ubuntu-20.04
+    needs: build
+    
+    steps:
+      - name: Notifica
+        run: echo "Email notificando publicacao"
+        
           
     
           
