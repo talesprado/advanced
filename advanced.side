@@ -1,0 +1,61 @@
+{
+  "id": "4442885a-f1b1-4f15-b4d3-147ec9def02c",
+  "version": "2.0",
+  "name": "advanced",
+  "url": "http://127.0.0.1:8080",
+  "tests": [{
+    "id": "d719c11e-da3a-4942-90d8-5202f3e9b331",
+    "name": "about_page",
+    "commands": [{
+      "id": "894579cd-ff8a-409d-b93a-8f8336c2036a",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0f4f7469-2a74-4c64-ae23-0c587c4aebae",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "845x695",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2f6af50e-5f8d-4965-92c2-2012037e22c3",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=About",
+      "targets": [
+        ["linkText=About", "linkText"],
+        ["css=li:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'About')]", "xpath:link"],
+        ["xpath=//ul[@id='w1']/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/index.php?r=site%2Fabout')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'About')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "db862e82-95f8-4c3e-9dc3-573a84861224",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'About')]", "xpath:innerText"]
+      ],
+      "value": "About"
+    }]
+  }],
+  "suites": [{
+    "id": "bc8394b4-4f08-4665-b324-077b19c903df",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d719c11e-da3a-4942-90d8-5202f3e9b331"]
+  }],
+  "urls": ["http://127.0.0.1:8080/"],
+  "plugins": []
+}
