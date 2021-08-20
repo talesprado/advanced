@@ -69,20 +69,12 @@ jobs:
           chromedriver-version: '92.0.4515.107'
                        
       - name: Prepare Aceptance Environment
-        run: |
-          google-chrome --version
-          ls -l /usr/bin/ | grep chrome
-          mv ./frontend/tests/acceptance.suite.yml.example ./frontend/tests/acceptance.suite.yml
-          composer require codeception/module-webdriver --dev
-          vendor/bin/codecept build -- -c frontend  
-          
+        run: |         
           wget https://selenium-release.storage.googleapis.com/3.7/selenium-server-standalone-3.7.0.jar
           java -jar selenium-server-standalone-3.7.0.jar &
           php -S 127.0.0.1:8080 -t frontend/web &  
-          
-      - name: Run Acceptance Tests
-        run: |                                                
-          vendor/bin/codecept run acceptance -- -c frontend
+          selenium-side-runner -c "browserName=firefox" advanced.side
+  
         
           
     
